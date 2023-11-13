@@ -14,7 +14,7 @@ export class Email extends ValueObject<EmailProps>{
     super(props);
     this.value = props.value;
   }
-//   Esto tiene chat
+  
   public static create(email: string): Email{
     const regexpErrors = validateRegex(email, EMAIL_REGEX);
 

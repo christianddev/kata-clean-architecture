@@ -6,33 +6,45 @@ import { Password } from "./Password";
 
 interface UserProps {
     name: Name;
-    emaiL: Email;
+    email: Email;
     password: Password;
 }
 
+interface data {
+    [key: string]: string
+}
+
 class User implements EntityData<UserProps>{
-    public name: Name;
-    public emaiL: Email;
-    public password: Password;
+    public readonly name: Name;
+    public readonly email: Email;
+    public readonly password: Password;
 
     constructor(props: UserProps) {
         this.name = props.name;
-        this.emaiL = props.emaiL;
+        this.email = props.email;
         this.password = props.password;
     }
     
-    create(props: UserProps): User {
-        if (!props.emaiL.value) {
+    create(props: data): User {
+        if (!props.emaiL) {
             throw new Error("email required");
         }
-        if (!props.name.value) {
+        if (!props.name) {
             throw new Error("name required");
         }
-        if (!props.password.value) {
+        if (!props.password) {
             throw new Error("email required");
         }
-
-        return new User(props);
+        
+        try {            
+            const email = Email.create(props.emaiL);
+            const name =  Name.create(props.name);
+            const password = Password.create(props.password, props.confirmPassword);
+    
+            return new User({email, name, password});
+        } catch (error) {
+            throw Error(error);
+        }
     }
     update(): UserProps {
         throw new Error("Method not implemented.");
