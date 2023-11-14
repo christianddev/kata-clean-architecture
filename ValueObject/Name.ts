@@ -7,7 +7,7 @@ interface NameProps {
 export class Name extends ValueObject<NameProps> {
     public readonly value: string;
 
-    constructor(props: NameProps) {
+    private constructor(props: NameProps) {
         super(props);
         this.value = props.value;
     }

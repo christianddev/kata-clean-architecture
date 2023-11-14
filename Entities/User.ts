@@ -1,7 +1,7 @@
-import { Email } from "./Email";
+import { Email } from "../ValueObject/Email";
 import { EntityData } from "./Entity";
-import { Name } from "./Name";
-import { Password } from "./Password";
+import { Name } from "../ValueObject/Name";
+import { Password } from "../ValueObject/Password";
 
 
 interface UserProps {
@@ -10,23 +10,26 @@ interface UserProps {
     password: Password;
 }
 
-interface data {
-    [key: string]: string
+interface UserData {
+    name: string;
+    email: string;
+    password: string;
+    confirmPassword: string
 }
 
-class User implements EntityData<UserProps>{
+export class User implements UserProps {
     public readonly name: Name;
     public readonly email: Email;
     public readonly password: Password;
 
-    constructor(props: UserProps) {
+    private constructor(props: UserProps) {
         this.name = props.name;
         this.email = props.email;
         this.password = props.password;
     }
     
-    create(props: data): User {
-        if (!props.emaiL) {
+    public static create(props: UserData): UserProps {
+        if (!props.email) {
             throw new Error("email required");
         }
         if (!props.name) {
@@ -37,15 +40,16 @@ class User implements EntityData<UserProps>{
         }
         
         try {            
-            const email = Email.create(props.emaiL);
+            const email = Email.create(props.email);
             const name =  Name.create(props.name);
             const password = Password.create(props.password, props.confirmPassword);
     
             return new User({email, name, password});
         } catch (error) {
-            throw Error(error);
+            throw Error(`error creating user: ${error}` );
         }
     }
+
     update(): UserProps {
         throw new Error("Method not implemented.");
     }

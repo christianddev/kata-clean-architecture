@@ -1,5 +1,5 @@
 import { ValueObject } from "./ValueObject";
-import { validateRegex } from './utils';
+import { validateRegex } from '../Utils/utils';
 
 export interface EmailProps {
   value: string
@@ -10,7 +10,7 @@ const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))
 export class Email extends ValueObject<EmailProps>{
   public readonly value: string;
     
-  constructor(props: EmailProps) {
+  private constructor(props: EmailProps) {
     super(props);
     this.value = props.value;
   }
