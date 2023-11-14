@@ -10,10 +10,30 @@ const mockUser = User.create({
   password: 'password123',
 });
 
+const mockUser2 = User.create({
+  id: '123',
+  name: 'Test User',
+  email: 'test2@example2.com',
+  password: 'password123',
+});
+
+const mockUser3 = User.create({
+  id: '123',
+  name: 'Test User',
+  email: 'test@repeated-domain.com',
+  password: 'password123',
+});
+
+const mockUser4 = User.create({
+  id: '123',
+  name: 'Test User',
+  email: 'test2@repeated-domain.com',
+  password: 'password123',
+});
+
 const mockUserRepository = {
-  getUsers: jest.fn(),
+  getUsers: jest.fn().mockImplementation(() => [mockUser2, mockUser3]),
   createUser: jest.fn(),
-  getUserByEmail: jest.fn(),
 };
 
 describe('AddUserUseCase', () => {
@@ -26,20 +46,20 @@ describe('AddUserUseCase', () => {
   });
 
   it('should add a new user successfully', async () => {
-    mockUserRepository.getUserByEmail.mockResolvedValue(false);
-
     await addUserUseCase.run(mockUser);
 
-    expect(mockUserRepository.getUserByEmail).toHaveBeenCalledWith(mockUser.email.value);
     expect(mockUserRepository.createUser).toHaveBeenCalledWith(mockUser);
   });
 
-  it('should throw an error when trying to add an existing user', async () => {
-    mockUserRepository.getUserByEmail.mockResolvedValue(true);
+  it('should throw an error when trying to add an existing user with the same email', async () => {
+    await expect(addUserUseCase.run(mockUser2)).rejects.toThrow('User aleady exists');
 
-    await expect(addUserUseCase.run(mockUser)).rejects.toThrow('User aleady exists');
+    expect(mockUserRepository.createUser).not.toHaveBeenCalled();
+  });
 
-    expect(mockUserRepository.getUserByEmail).toHaveBeenCalledWith(mockUser.email.value);
+  it('should throw an error when trying to add an existing user with the same domain', async () => {
+    await expect(addUserUseCase.run(mockUser4)).rejects.toThrow('User with same domain');
+
     expect(mockUserRepository.createUser).not.toHaveBeenCalled();
   });
 });

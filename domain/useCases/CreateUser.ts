@@ -9,12 +9,20 @@ export class CreateUserUseCase {
     }
 
     async run(user: User): Promise<void> {
-        const existingUser = await this.userRepository.getUserByEmail(user.email.value);
+        const users = await this.userRepository.getUsers();
 
-        if(existingUser) {
+        const userWithSameEmail = users.find(usr => usr.email.value === user.email.value);
+        const userDomain = user.email.value.split('@').pop()!;
+        const userWithSameDomain = users.find(usr => usr.email.value.includes(userDomain));
+
+        if(userWithSameEmail) {
             throw new Error("User aleady exists");
         }
 
+        if(userWithSameDomain) {
+            throw new Error("User with same domain");
+        }
+        
         this.userRepository.createUser(user);
     }
 
