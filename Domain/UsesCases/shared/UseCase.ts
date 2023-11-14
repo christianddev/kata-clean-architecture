@@ -1,3 +1,3 @@
-export default  interface UseCase {
-    run(): Promise<void> 
+export default  interface UseCase<T> {
+    run(props: T): Promise<void> 
 }

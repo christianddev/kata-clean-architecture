@@ -8,13 +8,21 @@ interface AddUserProps {
   password: string;
   confirmPassword: string;
 }
-export class AddUser implements UseCase {
+
+export class AddUser implements UseCase<AddUserProps> {
 
     constructor(private userRepository: UserRepository<User>){}
 
     async run(props: AddUserProps): Promise<void> {
         // TODO: apply validations
-        await this.userRepository.createUser(props)
+        const userData = {
+            name: props.name,
+            email: props.email,
+            password: props.password,
+            confirmPassword: props.confirmPassword
+
+        }
+        await this.userRepository.createUser(userData)
     }
 
 }
