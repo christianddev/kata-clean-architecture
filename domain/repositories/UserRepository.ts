@@ -1,6 +1,4 @@
-import { User } from "../entities/User";
-
-export interface UserRepository {
+export interface UserRepository<User> {
   getUsers(): Promise<User[]>;
 
   createUser(user: User): Promise<void>;

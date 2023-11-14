@@ -2,9 +2,9 @@ import { User } from "../entities/User";
 import { UserRepository } from "../repositories/UserRepository";
 
 export class GetUsersUseCase {
-    private userRepository: UserRepository;
+    private userRepository: UserRepository<User>;
 
-    constructor(userRepository: UserRepository){
+    constructor(userRepository: UserRepository<User>){
         this.userRepository = userRepository;
     }
 
