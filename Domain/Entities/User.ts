@@ -11,11 +11,14 @@ interface UserProps {
   id: string;
 }
 
-interface UserData {
+export interface UserCredentials {
   id?: string;
   name: string;
   email: string;
   password: string;
+}
+
+export interface UserData extends UserCredentials {
   confirmPassword: string;
 }
 
@@ -64,5 +67,14 @@ export class User extends Entity<UserProps> {
     };
 
     return new User(updatedData);
+  }
+
+  public toPrimitive(): UserCredentials {
+    return {
+      id: this.id,
+      email: this.email.value,
+      password: this.password.value,
+      name: this.name.value,
+    }
   }
 }
