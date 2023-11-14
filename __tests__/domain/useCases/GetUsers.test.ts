@@ -8,6 +8,9 @@ const mockUser1 = User.create({
   name: 'Test User',
   email: 'test@example.com',
   password: 'password123',
+  address: 'Alcalá',
+  city: 'Madrid',
+  postalCode: '88080',
 });
 
 const mockUser2 = User.create({
@@ -15,6 +18,9 @@ const mockUser2 = User.create({
   name: 'Test User 2',
   email: 'test2@example.com',
   password: 'password123',
+  address: 'Alcalá',
+  city: 'Madrid',
+  postalCode: '88080',
 });
 
 const mockUsers = [mockUser1, mockUser2];

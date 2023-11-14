@@ -3,13 +3,15 @@ import { Entity } from "./shared/Entity";
 import { Email } from "../valueObjects/Email";
 import { Name } from "../valueObjects/Name";
 import { Password } from "../valueObjects/Password";
+import { Address } from "../valueObjects/Address";
 
 
 interface UserData {
+  id: string;
   name: Name;
   email: Email;
   password: Password;
-  id: string;
+  address: Address;
 }
 
 export interface UserProps {
@@ -17,12 +19,16 @@ export interface UserProps {
   name: string;
   email: string;
   password: string;
+  address: string;
+  postalCode: string;
+  city: string;
 }
 
 export class User extends Entity<UserData> {
   public readonly name: Name;
   public readonly email: Email;
   public readonly password: Password;
+  public readonly address: Address;
 
   private constructor(props: UserData) {
     super(props.id);
@@ -30,6 +36,7 @@ export class User extends Entity<UserData> {
     this.name = props.name;
     this.email = props.email;
     this.password = props.password;
+    this.address = props.address;
   }
   
   public static create(props: UserProps): User {
@@ -48,8 +55,10 @@ export class User extends Entity<UserData> {
       const email = Email.create(props.email);
       const name =  Name.create(props.name);
       const password = Password.create(props.password);
+      const address = Address.create(props.address, props.postalCode, props.city);
 
-      return new User({id: id, email, name, password});
+
+      return new User({id: id, email, name, password, address});
     } catch (error) {
       throw Error(`error creating user: ${error}` );
     }
@@ -61,6 +70,8 @@ export class User extends Entity<UserData> {
       ...(props.email ? {email: props.email} : {email: this.email}),
       ...(props.name ? {name: props.name} : {name: this.name}),
       ...(props.password ? {password: props.password} : {password: this.password}),
+      ...(props.address ? {address: props.address} : {address: this.address}),
+
     };
 
     return new User(updatedData);

@@ -8,6 +8,9 @@ const mockUser = User.create({
   name: 'Test User',
   email: 'test@example.com',
   password: 'password123',
+  address: 'Alcalá',
+  city: 'Madrid',
+  postalCode: '88080',
 });
 
 const mockUser2 = User.create({
@@ -15,6 +18,9 @@ const mockUser2 = User.create({
   name: 'Test User',
   email: 'test2@example2.com',
   password: 'password123',
+  address: 'Alcalá',
+  city: 'Madrid',
+  postalCode: '88080',
 });
 
 const mockUser3 = User.create({
@@ -22,6 +28,9 @@ const mockUser3 = User.create({
   name: 'Test User',
   email: 'test@repeated-domain.com',
   password: 'password123',
+  address: 'Alcalá',
+  city: 'Madrid',
+  postalCode: '88080',
 });
 
 const mockUser4 = User.create({
@@ -29,6 +38,9 @@ const mockUser4 = User.create({
   name: 'Test User',
   email: 'test2@repeated-domain.com',
   password: 'password123',
+  address: 'Alcalá',
+  city: 'Madrid',
+  postalCode: '88080',
 });
 
 const mockUserRepository = {

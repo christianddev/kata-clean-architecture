@@ -9,7 +9,9 @@ describe("User", () => {
     name: 'John Doe',
     email: 'john.doe@example.com',
     password: 'Passw0rd2',
-    confirmPassword: 'Passw0rd2',
+    address: 'Alcalá', 
+    city: 'Madrid', 
+    postalCode: '88080',
   };
 
   it("should create an instance of user", () => {

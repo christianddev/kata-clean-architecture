@@ -1,10 +1,25 @@
 import { User, UserProps } from "../../../domain/entities/User";
 import { UserInMemoryRepository } from "../../../infrastucture/repositories/UserInMemoryRepository";
 
-// Mock data for testing
 const mockUsers: UserProps[] = [
-  { id: '1', name: 'User1', email: 'user1@example.com', password: 'Newpassword1' },
-  { id: '2', name: 'User2', email: 'user2@example.com', password: 'Newpassword2' },
+  { 
+    id: '1', 
+    name: 'User1',
+    email: 'user1@example.com',
+    password: 'Newpassword1',
+    address: 'Alcalá',
+    city: 'Madrid',
+    postalCode: '88080',
+  },
+  { 
+    id: '2',
+    name: 'User2',
+    email: 'user2@example.com',
+    password: 'Newpassword2',
+    address: 'Alcalá',
+    city: 'Madrid',
+    postalCode: '88080',
+  },
 ];
 
 describe('UserInMemoryRepository', () => {
@@ -15,7 +30,7 @@ describe('UserInMemoryRepository', () => {
   });
 
   it('should create a new user', async () => {
-    const userProps: UserProps = { name: 'NewUser', email: 'newuser@example.com', password: 'NewP12ssword1' };
+    const userProps: UserProps = { name: 'NewUser', email: 'newuser@example.com', password: 'NewP12ssword1', address: 'Alcalá', city: 'Madrid', postalCode: '88080' };
 
     await userRepository.createUser(User.create(userProps));
 
