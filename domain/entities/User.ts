@@ -65,13 +65,4 @@ export class User extends Entity<UserData> {
 
     return new User(updatedData);
   }
-
-  // public toPrimitive(): UserProps {
-  //   return {
-  //     id: this.id,
-  //     email: this.email.value,
-  //     password: this.password.value,
-  //     name: this.name.value,
-  //   }
-  // }
 }
