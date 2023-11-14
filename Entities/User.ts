@@ -1,5 +1,5 @@
 import { Email } from "../ValueObject/Email";
-import { Entity } from "./Entity";
+import { Entity } from "./shared/Entity";
 import { Name } from "../ValueObject/Name";
 import { Password } from "../ValueObject/Password";
 

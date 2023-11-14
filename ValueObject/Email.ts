@@ -1,4 +1,4 @@
-import { ValueObject } from "./ValueObject";
+import { ValueObject } from "./shared/ValueObject";
 import { validateRegex } from '../Utils/utils';
 
 export interface EmailProps {
