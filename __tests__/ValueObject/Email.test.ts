@@ -1,4 +1,4 @@
-import { Email, EmailProps } from '../../ValueObject/Email';
+import { Email } from '../../ValueObject/Email';
 
 describe('Email class tests', () => {
   it('creates an instance of Email with valid email', () => {

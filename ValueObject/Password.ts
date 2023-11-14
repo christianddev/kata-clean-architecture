@@ -14,7 +14,6 @@ export class Password extends ValueObject<PasswordProps> {
 
   public static create(password: string, confirmPassword: string): Password {
     const regexpErrors = validateRegex(password, PASSWORD_REGEX);
-
     if (password !== confirmPassword) {
       throw new Error("passwords do not match");
     } else if(regexpErrors){
