@@ -1,33 +1,30 @@
-import { Email } from "../ValueObject/Email";
 import { Entity } from "./shared/Entity";
-import { Name } from "../ValueObject/Name";
-import { Password } from "../ValueObject/Password";
+
+import { Email } from "../valueObject/Email";
+import { Name } from "../valueObject/Name";
+import { Password } from "../valueObject/Password";
 
 
-interface UserProps {
+interface UserData {
   name: Name;
   email: Email;
   password: Password;
   id: string;
 }
 
-export interface UserCredentials {
+export interface UserProps {
   id?: string;
   name: string;
   email: string;
   password: string;
 }
 
-export interface UserData extends UserCredentials {
-  confirmPassword: string;
-}
-
-export class User extends Entity<UserProps> {
+export class User extends Entity<UserData> {
   public readonly name: Name;
   public readonly email: Email;
   public readonly password: Password;
 
-  private constructor(props: UserProps) {
+  private constructor(props: UserData) {
     super(props.id);
     
     this.name = props.name;
@@ -35,7 +32,7 @@ export class User extends Entity<UserProps> {
     this.password = props.password;
   }
   
-  public static create(props: UserData): User {
+  public static create(props: UserProps): User {
     if (!props.email) {
       throw new Error("email required");
     }
@@ -50,7 +47,7 @@ export class User extends Entity<UserProps> {
       const id = props.id ?? crypto.randomUUID();
       const email = Email.create(props.email);
       const name =  Name.create(props.name);
-      const password = Password.create(props.password, props.confirmPassword);
+      const password = Password.create(props.password);
 
       return new User({id: id, email, name, password});
     } catch (error) {
@@ -58,8 +55,8 @@ export class User extends Entity<UserProps> {
     }
   }
 
-  public update(props: Partial<Omit<UserProps, "id">>): User {
-    const updatedData: UserProps = {
+  public update(props: Partial<Omit<UserData, "id">>): User {
+    const updatedData: UserData = {
       id: this.id,
       ...(props.email ? {email: props.email} : {email: this.email}),
       ...(props.name ? {name: props.name} : {name: this.name}),
@@ -69,12 +66,12 @@ export class User extends Entity<UserProps> {
     return new User(updatedData);
   }
 
-  public toPrimitive(): UserCredentials {
-    return {
-      id: this.id,
-      email: this.email.value,
-      password: this.password.value,
-      name: this.name.value,
-    }
-  }
+  // public toPrimitive(): UserProps {
+  //   return {
+  //     id: this.id,
+  //     email: this.email.value,
+  //     password: this.password.value,
+  //     name: this.name.value,
+  //   }
+  // }
 }

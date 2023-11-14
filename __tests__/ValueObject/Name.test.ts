@@ -1,4 +1,4 @@
-import { Name } from "../../ValueObject/Name";
+import { Name } from "../../domain/valueObject/Name";
 
 describe("Name", () => {
     it('should throws an error name required', () => {
