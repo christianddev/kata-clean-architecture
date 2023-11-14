@@ -1,5 +1,5 @@
 import { ValueObject } from "./shared/ValueObject";
-import { validateRegex } from '../../Utils/utils';
+import { validateRegex } from '../../utils/validations';
 
 const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 

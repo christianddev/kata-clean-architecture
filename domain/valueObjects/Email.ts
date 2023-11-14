@@ -1,5 +1,5 @@
 import { ValueObject } from "./shared/ValueObject";
-import { validateRegex } from '../../Utils/utils';
+import { validateRegex } from '../../utils/validations';
 
 export interface EmailProps {
   value: string

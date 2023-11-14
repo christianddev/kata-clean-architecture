@@ -1,4 +1,4 @@
-import { validateRegex } from "../../Utils/utils";
+import { validateRegex } from "../../utils/validations";
 
 describe("Utils", () => {
     describe("validateRegex", () => {
