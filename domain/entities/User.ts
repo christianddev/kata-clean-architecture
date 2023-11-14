@@ -1,8 +1,8 @@
 import { Entity } from "./shared/Entity";
 
-import { Email } from "../valueObject/Email";
-import { Name } from "../valueObject/Name";
-import { Password } from "../valueObject/Password";
+import { Email } from "../valueObjects/Email";
+import { Name } from "../valueObjects/Name";
+import { Password } from "../valueObjects/Password";
 
 
 interface UserData {

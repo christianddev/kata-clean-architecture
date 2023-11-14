@@ -1,7 +1,7 @@
-import { User } from '../../domain/entities/User';
-import { Email } from '../../domain/valueObject/Email';
-import { Name } from '../../domain/valueObject/Name';
-import { Password } from '../../domain/valueObject/Password';
+import { User } from '../../../domain/entities/User';
+import { Email } from '../../../domain/valueObjects/Email';
+import { Name } from '../../../domain/valueObjects/Name';
+import { Password } from '../../../domain/valueObjects/Password';
 
 
 describe("User", () => {

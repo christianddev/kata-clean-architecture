@@ -1,4 +1,4 @@
-import { Entity, EntityData } from "../../../domain/entities/shared/Entity";
+import { Entity, EntityData } from '../../../../domain/entities/shared/Entity';
 
 class SampleEntity extends Entity<any> {
   constructor(id: string) {

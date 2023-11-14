@@ -1,4 +1,4 @@
-import { Password } from "../../domain/valueObject/Password";
+import { Password } from "../../../domain/valueObjects/Password";
 
 describe('Password class tests', () => {
   it('creates an instance of Password with valid data', () => {
