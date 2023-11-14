@@ -8,11 +8,9 @@ export interface EmailProps {
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 export class Email extends ValueObject<EmailProps>{
-  public readonly value: string;
     
   private constructor(props: EmailProps) {
     super(props);
-    this.value = props.value;
   }
   
   public static create(email: string): Email{
@@ -26,6 +24,10 @@ export class Email extends ValueObject<EmailProps>{
       return new Email({value: this.format(email)});
     }
   }
+
+  public get value(): string {
+    return this.props.value;
+  };
 
   private static format(email: string): string {
     return email.trim().toLowerCase();

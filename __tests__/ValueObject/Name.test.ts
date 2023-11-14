@@ -24,16 +24,16 @@ describe("Name", () => {
     });
 
     it("should return true if the instances are equal", () => {
-      const instance1 = Name.create("Name")
-      const instance2 = Name.create(" Name")
-      const areEqual = instance1.equals(instance2)
-      expect(areEqual).toBeTruthy()
+      const instance1 = Name.create("Name");
+      const instance2 = Name.create(" Name");
+      const areEqual = instance1.equals(instance2);
+      expect(areEqual).toBe(true);
     })
   
     it("should return false if the instances are not equal", () => {
-      const instance1 = Name.create("username")
-      const instance2 = Name.create("name")
-      const areEqual = instance1.equals(instance2)
-      expect(areEqual).toBeFalsy()
+      const instance1 = Name.create("username");
+      const instance2 = Name.create("name");
+      const areEqual = instance1.equals(instance2);
+      expect(areEqual).toBe(false);
     })
 });

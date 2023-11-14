@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1699952782998" clover="3.2.0">
+  <project timestamp="1699952782998" name="All files">
+    <metrics statements="74" coveredstatements="74" conditionals="31" coveredconditionals="31" methods="19" coveredmethods="19" elements="124" coveredelements="124" complexity="0" loc="74" ncloc="74" packages="3" files="7" classes="7"/>
+    <package name="Entities">
+      <metrics statements="30" coveredstatements="30" conditionals="17" coveredconditionals="17" methods="5" coveredmethods="5"/>
+      <file name="Entity.ts" path="/home/paco/development/clean-architecture-course/kata-1/Entities/Entity.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="21" type="stmt"/>
+        <line num="7" count="21" type="stmt"/>
+        <line num="11" count="7" type="cond" truecount="4" falsecount="0"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+      </file>
+      <file name="User.ts" path="/home/paco/development/clean-architecture-course/kata-1/Entities/User.ts">
+        <metrics statements="24" coveredstatements="24" conditionals="13" coveredconditionals="13" methods="3" coveredmethods="3"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="28" count="14" type="stmt"/>
+        <line num="30" count="14" type="stmt"/>
+        <line num="31" count="14" type="stmt"/>
+        <line num="32" count="14" type="stmt"/>
+        <line num="36" count="15" type="cond" truecount="1" falsecount="0"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="39" count="14" type="cond" truecount="1" falsecount="0"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="42" count="13" type="cond" truecount="1" falsecount="0"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="46" count="12" type="stmt"/>
+        <line num="47" count="12" type="cond" truecount="4" falsecount="0"/>
+        <line num="48" count="12" type="stmt"/>
+        <line num="49" count="11" type="stmt"/>
+        <line num="50" count="11" type="stmt"/>
+        <line num="52" count="10" type="stmt"/>
+        <line num="54" count="2" type="stmt"/>
+        <line num="59" count="4" type="stmt"/>
+        <line num="66" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="Utils">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="utils.ts" path="/home/paco/development/clean-architecture-course/kata-1/Utils/utils.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="2" count="44" type="stmt"/>
+      </file>
+    </package>
+    <package name="ValueObject">
+      <metrics statements="42" coveredstatements="42" conditionals="14" coveredconditionals="14" methods="13" coveredmethods="13"/>
+      <file name="Email.ts" path="/home/paco/development/clean-architecture-course/kata-1/ValueObject/Email.ts">
+        <metrics statements="13" coveredstatements="13" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="13" count="19" type="stmt"/>
+        <line num="17" count="22" type="stmt"/>
+        <line num="19" count="22" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="21" type="cond" truecount="2" falsecount="0"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="24" count="19" type="stmt"/>
+        <line num="29" count="6" type="stmt"/>
+        <line num="33" count="19" type="stmt"/>
+      </file>
+      <file name="Name.ts" path="/home/paco/development/clean-architecture-course/kata-1/ValueObject/Name.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="10" count="19" type="stmt"/>
+        <line num="14" count="20" type="cond" truecount="2" falsecount="0"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="17" count="19" type="stmt"/>
+        <line num="22" count="6" type="stmt"/>
+        <line num="26" count="19" type="stmt"/>
+      </file>
+      <file name="Password.ts" path="/home/paco/development/clean-architecture-course/kata-1/ValueObject/Password.ts">
+        <metrics statements="12" coveredstatements="12" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="3"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="12" count="17" type="stmt"/>
+        <line num="16" count="20" type="stmt"/>
+        <line num="18" count="20" type="cond" truecount="2" falsecount="0"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="18" type="cond" truecount="2" falsecount="0"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="23" count="17" type="stmt"/>
+        <line num="28" count="5" type="stmt"/>
+      </file>
+      <file name="ValueObject.ts" path="/home/paco/development/clean-architecture-course/kata-1/ValueObject/ValueObject.ts">
+        <metrics statements="9" coveredstatements="9" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="6" count="61" type="stmt"/>
+        <line num="7" count="61" type="stmt"/>
+        <line num="11" count="61" type="stmt"/>
+        <line num="15" count="11" type="cond" truecount="3" falsecount="0"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="18" count="9" type="cond" truecount="1" falsecount="0"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="22" count="8" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

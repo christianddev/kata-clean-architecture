@@ -1,43 +1,184 @@
 import { User } from "../../Entities/User";
+import { Email } from "../../ValueObject/Email";
+import { Name } from "../../ValueObject/Name";
+import { Password } from "../../ValueObject/Password";
 
 describe("User", () => {
-    it("should create an instance of user", () => {
-        const name = "name"
-        const email = "email@email.com"
-        const password = "Abc123123"
+  const validUserData = {
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    password: 'Passw0rd2',
+    confirmPassword: 'Passw0rd2',
+  };
 
-        const user = User.create({name, email, password, confirmPassword: password})
+  it("should create an instance of user", () => {
+    const user = User.create(validUserData)
 
-        expect(user).toBeInstanceOf(User)
-    })
+    expect(user).toBeInstanceOf(User)
+  })
 
-    it("should return an error", () => {
-        const name = "name"
-        const email = "invalid-email"
-        const password = "Abc123123"
+  it("should return an error if the email is not valid", () => {
+    const userDataWithoutEmail = {
+        ...validUserData,
+        email: 'invalid-email',
+    };
 
-        expect(() => User.create({name, email, password, confirmPassword: password})).toThrow(/error creating user/i)
-    })
+    expect(() => User.create(userDataWithoutEmail)).toThrow(/error creating user/i)
+  })
 
-    // it("should return true if the instances are equal", () => {
-    //     const name = "name"
-    //     const email = "email@email.com"
-    //     const password = "Abc123123"
+  it('creates an instance of User with valid data', () => {
+    const userInstance = User.create(validUserData);
 
-    //     const instance1 = User.create({name, email, password, confirmPassword: password})
-    //     const instance2 = User.create({name, email, password, confirmPassword: password})
-    //     const areEqual = instance1.equals(instance2)
-    //     expect(areEqual).toBeTruthy()
-    // })
+    expect(userInstance).toBeInstanceOf(User);
+    expect(userInstance.id).toHaveLength(36);
+    expect(userInstance.name).toBeInstanceOf(Name);
+    expect(userInstance.email).toBeInstanceOf(Email);
+    expect(userInstance.password).toBeInstanceOf(Password);
+  });
+
+  it('throws an error for missing email during creation', () => {
+    const userDataWithoutEmail = {
+      ...validUserData,
+      email: '',
+    };
+
+    expect(() => User.create(userDataWithoutEmail)).toThrow('email required');
+  });
+
+  it('throws an error for missing name during creation', () => {
+    const userDataWithoutName = {
+      ...validUserData,
+      name: '',
+    };
+
+    expect(() => User.create(userDataWithoutName)).toThrow('name required');
+  });
+
+  it('throws an error for missing password during creation', () => {
+    const userDataWithoutPassword = {
+      ...validUserData,
+      password: '',
+      confirmPassword: '',
+    };
+
+    expect(() => User.create(userDataWithoutPassword)).toThrow('password required');
+  });
+
+  it('throws an error if password and confirmPassword do not match during creation', () => {
+    const userDataWithMismatchedPasswords = {
+      ...validUserData,
+      confirmPassword: 'MismatchedPassword',
+    };
+
+    expect(() => User.create(userDataWithMismatchedPasswords)).toThrow(/passwords do not match/i);
+  });
+
+  it('should update only the user email', () => {
+    const initialUserProps = {
+      ...validUserData,
+    };
+
+    const userInstance = User.create(initialUserProps);
+
+    const updatedUserData = {
+      id: '123',
+      email: Email.create('updated.email@example.com'),
+    };
+
+    const updatedUser = userInstance.update(updatedUserData);
+
+    expect(updatedUser).toBeInstanceOf(User);
+    expect(updatedUser.id).toHaveLength(36);
+    expect(updatedUser.name.value).toEqual(initialUserProps.name);
+    expect(updatedUser.email.value).toEqual('updated.email@example.com');
+    expect(updatedUser.password.value).toEqual(initialUserProps.password);
+  });
+
+  it('should update only the user name', () => {
+    const initialUserProps = {
+      ...validUserData,
+    };
+
+    const userInstance = User.create(initialUserProps);
+
+    const updatedUserData = {
+      id: '123',
+      name: Name.create('Updated Name'),
+    };
+
+    const updatedUser = userInstance.update(updatedUserData);
+
+    expect(updatedUser).toBeInstanceOf(User);
+    expect(updatedUser.id).toHaveLength(36);
+    expect(updatedUser.name.value).toEqual('Updated Name');
+    expect(updatedUser.email.value).toEqual(initialUserProps.email);
+    expect(updatedUser.password.value).toEqual(initialUserProps.password);
+  });
+
+  it('should update only the user password', () => {
+    const initialUserProps = {
+      ...validUserData,
+    };
+
+    const userInstance = User.create(initialUserProps);
+
+    const updatedUserData = {
+      id: '123',
+      password: Password.create('UpdatedPAssw0rd', 'UpdatedPAssw0rd'),
+    };
+
+    const updatedUser = userInstance.update(updatedUserData);
+
+    expect(updatedUser).toBeInstanceOf(User);
+    expect(updatedUser.id).toHaveLength(36);
+    expect(updatedUser.name.value).toEqual(initialUserProps.name);
+    expect(updatedUser.email.value).toEqual(initialUserProps.email);
+    expect(updatedUser.password.value).toEqual('UpdatedPAssw0rd');
+  });
+
+  it('should update all the user properties', () => {
+    const initialUserProps = {
+      ...validUserData,
+    };
+
+    const userInstance = User.create(initialUserProps);
+
+    const updatedUserData = {
+      id: '123',
+      email: Email.create('updated.email@example.com'),
+      name: Name.create('Updated Name'),
+      password: Password.create('UpdatedPAssw0rd', 'UpdatedPAssw0rd'),
+    };
+
+    const updatedUser = userInstance.update(updatedUserData);
+
+    expect(updatedUser).toBeInstanceOf(User);
+    expect(updatedUser.id).toHaveLength(36);
+    expect(updatedUser.name.value).toEqual('Updated Name');
+    expect(updatedUser.email.value).toEqual('updated.email@example.com');
+    expect(updatedUser.password.value).toEqual('UpdatedPAssw0rd');
+  });
+
+  it("should return true if the instances are equal", () => {
+    const initialUserProps = {
+      ...validUserData,
+      id: 'unique-id-123',
+    };
+
+    const instance1 = User.create(initialUserProps);
+    const instance2 = User.create(initialUserProps);
+    const areEqual = instance1.equals(instance2);
+    expect(areEqual).toBe(true);
+  })
   
-    // it("should return false if the instances are not equal", () => {
-    //     const name = "name"
-    //     const email = "email@email.com"
-    //     const password = "Abc123123"
+  it("should return false if the instances are not equal", () => {
+    const initialUserProps = {
+      ...validUserData,
+    };
 
-    //     const instance1 = User.create({name, email, password, confirmPassword: password})
-    //     const instance2 = User.create({name: "otherName", email, password, confirmPassword: password})
-    //     const areEqual = instance1.equals(instance2)
-    //     expect(areEqual).toBeFalsy()
-    // })
+    const instance1 = User.create(initialUserProps);
+    const instance2 = User.create(initialUserProps);
+    const areEqual = instance1.equals(instance2);
+    expect(areEqual).toBe(false);
+  })
 });

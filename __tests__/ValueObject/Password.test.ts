@@ -25,18 +25,18 @@ describe('Password class tests', () => {
 
   it("should return true if the instances are equal", () => {
     const password = 'Abc123123';
-    const instance1 = Password.create(password, password)
-    const instance2 = Password.create(password, password)
-    const areEqual = instance1.equals(instance2)
-    expect(areEqual).toBeTruthy()
+    const instance1 = Password.create(password, password);
+    const instance2 = Password.create(password, password);
+    const areEqual = instance1.equals(instance2);
+    expect(areEqual).toBe(true);
   })
 
   it("should return false if the instances are not equal", () => {
     const password = 'Abc123123';
-    const instance1 = Password.create(password, password)
+    const instance1 = Password.create(password, password);
     const password2 = '123123Abc';
-    const instance2 = Password.create(password2, password2)
-    const areEqual = instance1.equals(instance2)
-    expect(areEqual).toBeFalsy()
+    const instance2 = Password.create(password2, password2);
+    const areEqual = instance1.equals(instance2);
+    expect(areEqual).toBe(false);
   })
 });

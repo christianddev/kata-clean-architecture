@@ -1,8 +1,17 @@
-// export abstract class Entity<T> {
-//   public create<I>(a:I): T
-// }
+export interface EntityData {
+  id: string;
+}
 
-export interface EntityData<T> {
-    create(): T,
-    update(): T, // TODO: implement another interface for update
+export abstract class Entity<T> implements EntityData {
+  constructor(public id: string) {
+    this.id = id;
+  }
+
+  public equals(entity?: Entity<T>): boolean {
+    if (entity === null || entity === undefined || !(entity instanceof Entity)) {
+      return false;
+    }
+    
+    return this.id === entity.id;
+  }
 }

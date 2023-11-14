@@ -5,11 +5,9 @@ interface NameProps {
 }
 
 export class Name extends ValueObject<NameProps> {
-    public readonly value: string;
 
     private constructor(props: NameProps) {
         super(props);
-        this.value = props.value;
     }
 
     public static create(name: string): Name {
@@ -20,6 +18,10 @@ export class Name extends ValueObject<NameProps> {
         }
     }
 
+    public get value(): string {
+        return this.props.value
+    };
+    
     private static format(name: string): string {
         return name.trim();
     }
