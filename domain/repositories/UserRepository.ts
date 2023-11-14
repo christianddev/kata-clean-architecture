@@ -3,5 +3,5 @@ export interface UserRepository<User> {
 
   createUser(user: User): Promise<void>;
 
-  getUserByEmail(email: string): Promise<User>;
+  getUserByEmail(email: string): Promise<boolean>;
 }

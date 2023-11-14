@@ -16,14 +16,9 @@ export class UserInMemoryRepository implements UserRepository<User> {
         this.users.push(user);
     }
 
-    async getUserByEmail(email: string): Promise<User> {
-        // TODO: is this correct?
-        const match = this.users.find(user => user.email.value === email);
+    async getUserByEmail(email: string): Promise<boolean> {
+        const userByEmail = this.users.find(user => user.email.value === email);
 
-        if(!match) {
-            throw new Error('User does not exists');
-        }
-
-        return match;
+        return Boolean(userByEmail);
     }
 }
