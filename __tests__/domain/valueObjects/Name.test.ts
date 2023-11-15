@@ -4,7 +4,7 @@ describe("Name", () => {
     it('should throws an error name required', () => {
       const emptyName = '';
   
-      expect(() => Name.create(emptyName)).toThrow('name required.');
+      expect(() => Name.create(emptyName)).toThrow('name is required');
     });
 
     it('should creates an instance of Name with valid data', () => {

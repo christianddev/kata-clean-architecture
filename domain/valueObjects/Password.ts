@@ -14,7 +14,9 @@ export class Password extends ValueObject<PasswordProps> {
   public static create(password: string): Password {
     const regexpErrors = validateRegex(password, PASSWORD_REGEX);
 
-    if(regexpErrors){
+    if(password.length === 0) {
+      throw new Error("password is required");
+    } else if(regexpErrors){
       throw new Error("password is not valid");
     } else {
       return new Password({ password });

@@ -2,16 +2,15 @@ import { UserInMemoryRepository } from "./data/UserInMemoryRepository";
 import { CreateUserUseCase } from "./domain/useCases/CreateUser";
 import { GetUsersUseCase } from "./domain/useCases/GetUsers";
 import { UserPresenter } from "./presentation/UserPresenter";
-import { UserViewTerminal } from "./presentation/UserViewTerminal";
+import { UsersView } from './presentation/UsersView';
 
 
 export class CompositionRoot {
-    static provideUserPresenter() {
-        const usersView = new UserViewTerminal();        
+    static provideUserPresenter(view: UsersView) {
         const userRepository = new UserInMemoryRepository();
         const addUserCase = new CreateUserUseCase(userRepository);
         const getUserCase = new GetUsersUseCase(userRepository);
 
-        return new UserPresenter(usersView, addUserCase, getUserCase)
+        return new UserPresenter(view, addUserCase, getUserCase)
     }
 }

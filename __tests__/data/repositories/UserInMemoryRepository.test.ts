@@ -1,5 +1,5 @@
+import { UserInMemoryRepository } from "../../../data/UserInMemoryRepository";
 import { User, UserProps } from "../../../domain/entities/User";
-import { UserInMemoryRepository } from "../../../infrastucture/repositories/UserInMemoryRepository";
 
 const mockUsers: UserProps[] = [
   { 

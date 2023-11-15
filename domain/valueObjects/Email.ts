@@ -17,9 +17,9 @@ export class Email extends ValueObject<EmailProps>{
     const regexpErrors = validateRegex(email, EMAIL_REGEX);
 
     if (email.length === 0) {
-      throw new Error("Email is empty.");
+      throw new Error("email is required");
     } else if (regexpErrors) {
-      throw new Error("Email is not valid.");
+      throw new Error("email is not valid");
     } else {
       return new Email({value: this.format(email)});
     }

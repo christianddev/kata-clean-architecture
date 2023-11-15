@@ -12,7 +12,7 @@ export class Name extends ValueObject<NameProps> {
 
     public static create(name: string): Name {
         if (name.length === 0) {
-            throw new Error("name required.");
+            throw new Error("name is required");
         } else {
             return new Name({value: this.format(name)});
         }

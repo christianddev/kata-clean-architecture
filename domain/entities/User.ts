@@ -40,16 +40,6 @@ export class User extends Entity<UserData> {
   }
   
   public static create(props: UserProps): User {
-    if (!props.email) {
-      throw new Error("email required");
-    }
-    if (!props.name) {
-      throw new Error("name required");
-    }
-    if (!props.password) {
-      throw new Error("password required");
-    }
-    
     try {
       const id = props.id ?? crypto.randomUUID();
       const email = Email.create(props.email);
@@ -57,10 +47,9 @@ export class User extends Entity<UserData> {
       const password = Password.create(props.password);
       const address = Address.create(props.address, props.postalCode, props.city);
 
-
       return new User({id: id, email, name, password, address});
     } catch (error) {
-      throw Error(`error creating user: ${error}` );
+      throw Error(error);
     }
   }
 

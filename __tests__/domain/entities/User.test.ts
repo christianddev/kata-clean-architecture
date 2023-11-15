@@ -26,7 +26,7 @@ describe("User", () => {
         email: 'invalid-email',
     };
 
-    expect(() => User.create(userDataWithoutEmail)).toThrow(/error creating user/i)
+    expect(() => User.create(userDataWithoutEmail)).toThrow(/email is not valid/i)
   })
 
   it('creates an instance of User with valid data', () => {
@@ -45,7 +45,7 @@ describe("User", () => {
       email: '',
     };
 
-    expect(() => User.create(userDataWithoutEmail)).toThrow('email required');
+    expect(() => User.create(userDataWithoutEmail)).toThrow(/email is required/i);
   });
 
   it('throws an error for missing name during creation', () => {
@@ -54,7 +54,7 @@ describe("User", () => {
       name: '',
     };
 
-    expect(() => User.create(userDataWithoutName)).toThrow('name required');
+    expect(() => User.create(userDataWithoutName)).toThrow(/name is required/i);
   });
 
   it('throws an error for missing password during creation', () => {
@@ -64,7 +64,7 @@ describe("User", () => {
       confirmPassword: '',
     };
 
-    expect(() => User.create(userDataWithoutPassword)).toThrow('password required');
+    expect(() => User.create(userDataWithoutPassword)).toThrow(/password is required/i);
   });
 
   it('should update only the user email', () => {

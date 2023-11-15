@@ -12,13 +12,13 @@ describe('Email class tests', () => {
   it('throws an error for an empty email', () => {
     const emptyEmail = '';
 
-    expect(() => Email.create(emptyEmail)).toThrow('Email is empty.');
+    expect(() => Email.create(emptyEmail)).toThrow('email is required');
   });
 
   it('throws an error for an invalid email', () => {
     const invalidEmail = 'invalid-email';
 
-    expect(() => Email.create(invalidEmail)).toThrow('Email is not valid.');
+    expect(() => Email.create(invalidEmail)).toThrow('email is not valid');
   });
 
   it('formats the email correctly', () => {

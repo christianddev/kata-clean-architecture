@@ -20,7 +20,7 @@ export class Address extends ValueObject<AddressProps> {
 
   public static create(address: string, postalCode: string, city: string): Address {
     if (!address || !postalCode || !city) {
-      throw new Error("Address, postal code, and city are required.");
+      throw new Error("address, postal code, and city are required");
     }
 
     return new Address({ address, postalCode, city });
