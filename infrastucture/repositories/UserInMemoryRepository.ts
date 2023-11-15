@@ -1,7 +1,7 @@
 import { User } from '../../domain/entities/User';
 import { UserRepository } from '../../domain/repositories/UserRepository';
 
-export class UserInMemoryRepository implements UserRepository<User> {
+export class UserInMemoryRepository implements UserRepository {
     users: User[];
 
     constructor(){
