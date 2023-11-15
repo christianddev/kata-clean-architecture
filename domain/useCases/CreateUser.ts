@@ -2,9 +2,9 @@ import { User } from "../entities/User";
 import { UserRepository } from "../repositories/UserRepository";
 
 export class CreateUserUseCase {
-    private userRepository: UserRepository<User>;
+    private userRepository: UserRepository;
 
-    constructor(userRepository: UserRepository<User>){
+    constructor(userRepository: UserRepository){
         this.userRepository = userRepository;
     }
 
@@ -16,7 +16,7 @@ export class CreateUserUseCase {
         const userWithSameDomain = users.find(usr => usr.email.value.includes(userDomain));
 
         if(userWithSameEmail) {
-            throw new Error("User aleady exists");
+            throw new Error("User already exists");
         }
 
         if(userWithSameDomain) {

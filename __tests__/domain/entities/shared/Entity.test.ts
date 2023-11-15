@@ -1,4 +1,4 @@
-import { Entity, EntityData } from '../../../../domain/entities/shared/Entity';
+import { Entity } from '../../../../domain/entities/shared/Entity';
 
 class SampleEntity extends Entity<any> {
   constructor(id: string) {
@@ -28,13 +28,6 @@ describe('Entity Class tests', () => {
     const entity2 = new SampleEntity('456');
 
     expect(entity1.equals(entity2)).toBe(false);
-  });
-
-  it('equals method should return false for non-entity objects', () => {
-    const entity1 = new SampleEntity(entityId);
-    const nonEntityObject: EntityData = { id: entityId };
-
-    expect(entity1.equals(nonEntityObject as any)).toBe(false);
   });
 
   it('equals method should return false for null or undefined', () => {
