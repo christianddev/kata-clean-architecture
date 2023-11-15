@@ -20,10 +20,16 @@ export class UserPresenter {
 
     public initManager() {
         this.showWelcomeMessage();
+        this.showUsers();
     }
 
-    public showWelcomeMessage() {
+    private showWelcomeMessage() {
         this.view.showWelcomeMessage();
+    }
+
+    private async showUsers() {
+        const users = await this.getUser.run();
+        this.view.showUsers(users.map(user => user.name.value));
     }
 
 }

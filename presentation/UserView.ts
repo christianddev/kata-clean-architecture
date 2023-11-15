@@ -1,5 +1,5 @@
 export interface UserView {
     showWelcomeMessage(): void;
     
-    // showUsers(): void;
+    showUsers(users: string[]): void;
 }
