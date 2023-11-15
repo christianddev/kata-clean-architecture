@@ -16,7 +16,7 @@ export class CreateUserUseCase {
         const userWithSameDomain = users.find(usr => usr.email.value.includes(userDomain));
 
         if(userWithSameEmail) {
-            throw new Error("User aleady exists");
+            throw new Error("User already exists");
         }
 
         if(userWithSameDomain) {
