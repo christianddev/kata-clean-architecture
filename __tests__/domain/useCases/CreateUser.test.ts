@@ -64,7 +64,7 @@ describe('AddUserUseCase', () => {
   });
 
   it('should throw an error when trying to add an existing user with the same email', async () => {
-    await expect(addUserUseCase.run(mockUser2)).rejects.toThrow('User aleady exists');
+    await expect(addUserUseCase.run(mockUser2)).rejects.toThrow('User already exists');
 
     expect(mockUserRepository.createUser).not.toHaveBeenCalled();
   });
