@@ -1,8 +1,5 @@
-export interface EntityData {
-  id: string;
-}
 
-export abstract class Entity<T> implements EntityData {
+export abstract class Entity<T> {
   constructor(public id: string) {
     this.id = id;
   }
