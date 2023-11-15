@@ -46,6 +46,7 @@ const mockUser4 = User.create({
 const mockUserRepository = {
   getUsers: jest.fn().mockImplementation(() => [mockUser2, mockUser3]),
   createUser: jest.fn(),
+  getUserByEmail: jest.fn(),
 };
 
 describe('AddUserUseCase', () => {
