@@ -1,4 +1,4 @@
-import { ValueObject, ValueObjectProps } from "../../../ValueObject/shared/ValueObject";
+import { ValueObject, ValueObjectProps } from '../../../../domain/valueObjects/shared/ValueObject';
 
 class SampleValueObject extends ValueObject<any> {
   constructor(props: ValueObjectProps) {

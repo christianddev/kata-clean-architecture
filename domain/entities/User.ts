@@ -1,41 +1,45 @@
-import { Email } from "../ValueObject/Email";
 import { Entity } from "./shared/Entity";
-import { Name } from "../ValueObject/Name";
-import { Password } from "../ValueObject/Password";
+
+import { Email } from "../valueObjects/Email";
+import { Name } from "../valueObjects/Name";
+import { Password } from "../valueObjects/Password";
+import { Address } from "../valueObjects/Address";
 
 
-interface UserProps {
+interface UserData {
+  id: string;
   name: Name;
   email: Email;
   password: Password;
-  id: string;
+  address: Address;
 }
 
-export interface UserCredentials {
+export interface UserProps {
   id?: string;
   name: string;
   email: string;
   password: string;
+  address: string;
+  postalCode: string;
+  city: string;
 }
 
-export interface UserData extends UserCredentials {
-  confirmPassword: string;
-}
-
-export class User extends Entity<UserProps> {
+export class User extends Entity<UserData> {
   public readonly name: Name;
   public readonly email: Email;
   public readonly password: Password;
+  public readonly address: Address;
 
-  private constructor(props: UserProps) {
+  private constructor(props: UserData) {
     super(props.id);
     
     this.name = props.name;
     this.email = props.email;
     this.password = props.password;
+    this.address = props.address;
   }
   
-  public static create(props: UserData): User {
+  public static create(props: UserProps): User {
     if (!props.email) {
       throw new Error("email required");
     }
@@ -50,31 +54,26 @@ export class User extends Entity<UserProps> {
       const id = props.id ?? crypto.randomUUID();
       const email = Email.create(props.email);
       const name =  Name.create(props.name);
-      const password = Password.create(props.password, props.confirmPassword);
+      const password = Password.create(props.password);
+      const address = Address.create(props.address, props.postalCode, props.city);
 
-      return new User({id: id, email, name, password});
+
+      return new User({id: id, email, name, password, address});
     } catch (error) {
       throw Error(`error creating user: ${error}` );
     }
   }
 
-  public update(props: Partial<Omit<UserProps, "id">>): User {
-    const updatedData: UserProps = {
+  public update(props: Partial<Omit<UserData, "id">>): User {
+    const updatedData: UserData = {
       id: this.id,
       ...(props.email ? {email: props.email} : {email: this.email}),
       ...(props.name ? {name: props.name} : {name: this.name}),
       ...(props.password ? {password: props.password} : {password: this.password}),
+      ...(props.address ? {address: props.address} : {address: this.address}),
+
     };
 
     return new User(updatedData);
-  }
-
-  public toPrimitive(): UserCredentials {
-    return {
-      id: this.id,
-      email: this.email.value,
-      password: this.password.value,
-      name: this.name.value,
-    }
   }
 }

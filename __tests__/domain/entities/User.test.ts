@@ -1,14 +1,17 @@
-import { User } from "../../Entities/User";
-import { Email } from "../../ValueObject/Email";
-import { Name } from "../../ValueObject/Name";
-import { Password } from "../../ValueObject/Password";
+import { User } from '../../../domain/entities/User';
+import { Email } from '../../../domain/valueObjects/Email';
+import { Name } from '../../../domain/valueObjects/Name';
+import { Password } from '../../../domain/valueObjects/Password';
+
 
 describe("User", () => {
   const validUserData = {
     name: 'John Doe',
     email: 'john.doe@example.com',
     password: 'Passw0rd2',
-    confirmPassword: 'Passw0rd2',
+    address: 'Alcalá', 
+    city: 'Madrid', 
+    postalCode: '88080',
   };
 
   it("should create an instance of user", () => {
@@ -64,15 +67,6 @@ describe("User", () => {
     expect(() => User.create(userDataWithoutPassword)).toThrow('password required');
   });
 
-  it('throws an error if password and confirmPassword do not match during creation', () => {
-    const userDataWithMismatchedPasswords = {
-      ...validUserData,
-      confirmPassword: 'MismatchedPassword',
-    };
-
-    expect(() => User.create(userDataWithMismatchedPasswords)).toThrow(/passwords do not match/i);
-  });
-
   it('should update only the user email', () => {
     const initialUserProps = {
       ...validUserData,
@@ -124,7 +118,7 @@ describe("User", () => {
 
     const updatedUserData = {
       id: '123',
-      password: Password.create('UpdatedPAssw0rd', 'UpdatedPAssw0rd'),
+      password: Password.create('UpdatedPAssw0rd'),
     };
 
     const updatedUser = userInstance.update(updatedUserData);
@@ -147,7 +141,7 @@ describe("User", () => {
       id: '123',
       email: Email.create('updated.email@example.com'),
       name: Name.create('Updated Name'),
-      password: Password.create('UpdatedPAssw0rd', 'UpdatedPAssw0rd'),
+      password: Password.create('UpdatedPAssw0rd'),
     };
 
     const updatedUser = userInstance.update(updatedUserData);

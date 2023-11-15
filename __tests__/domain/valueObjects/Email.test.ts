@@ -1,4 +1,4 @@
-import { Email } from '../../ValueObject/Email';
+import { Email } from "../../../domain/valueObjects/Email";
 
 describe('Email class tests', () => {
   it('creates an instance of Email with valid email', () => {
