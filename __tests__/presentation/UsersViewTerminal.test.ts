@@ -13,13 +13,13 @@ const mockUser = User.create({
     address: 'Alcalá',
     city: 'Madrid',
     postalCode: '88080',
-  });
+});
 
 describe('UsersViewTerminal', () => {
     let usersViewTerminal: UsersViewTerminal;
     let rl: readLine.Interface;
 
-    const spyConsole = jest.spyOn(console, 'log').mockImplementation(() => {});
+    const spyConsole = jest.spyOn(console, 'log').mockImplementation(() => { });
 
     beforeEach(() => {
         rl = readLine.createInterface({
@@ -30,11 +30,7 @@ describe('UsersViewTerminal', () => {
     });
 
     afterEach(() => {
-        jest.clearAllMocks();   
-    });
-
-    it('should be true', async () => {
-        expect(true).toBe(true);
+        jest.clearAllMocks();
     });
 
     it('should show welcome message', async () => {
@@ -75,7 +71,7 @@ describe('UsersViewTerminal', () => {
         rl.question = jest.fn().mockImplementationOnce(
             (_question: string, callback: Function) => {
                 callback("12345");
-        });
+            });
 
         const postalCode = await usersViewTerminal.requestInputPostalCode();
         expect(postalCode).toBe('12345');
@@ -86,7 +82,7 @@ describe('UsersViewTerminal', () => {
         rl.question = jest.fn().mockImplementationOnce(
             (_question: string, callback: Function) => {
                 callback("Test Address");
-        });
+            });
 
         const address = await usersViewTerminal.requestInputAddress();
         expect(address).toBe('Test Address');
@@ -97,7 +93,7 @@ describe('UsersViewTerminal', () => {
         rl.question = jest.fn().mockImplementationOnce(
             (_question: string, callback: Function) => {
                 callback("Test City");
-        });
+            });
 
         const city = await usersViewTerminal.requestInputCity();
         expect(city).toBe('Test City');
@@ -108,7 +104,7 @@ describe('UsersViewTerminal', () => {
         rl.question = jest.fn().mockImplementationOnce(
             (_question: string, callback: Function) => {
                 callback("Test Password");
-        });
+            });
 
         const password = await usersViewTerminal.requestInputPassword();
         expect(password).toBe('Test Password');

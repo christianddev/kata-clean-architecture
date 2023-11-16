@@ -9,26 +9,26 @@ export class UsersViewTerminal implements UsersView {
 
     private rl: readLine.Interface;
 
-    constructor(readline: readLine.Interface){
+    constructor(readline: readLine.Interface) {
         this.rl = readline;
     }
 
-    
-    async initialize(){
+
+    async initialize() {
         await this.userPresenter.initManager();
     }
-    
-    
+
+
     showWelcomeMessage(): void {
         console.log('Welcome to the user manager!');
     }
-    
+
     showError(message: string): void {
         console.log(colours.bg.black, colours.fg.red,);
         console.log('\nOops!! Something went wrong...');
         console.log(`${message}\n`, colours.reset);
     }
-    
+
     showSuccess(user: User): void {
         console.log(colours.bg.black, colours.fg.green);
         console.log(`User with the email <<${user.email.value}>> created successfully`, colours.reset)
