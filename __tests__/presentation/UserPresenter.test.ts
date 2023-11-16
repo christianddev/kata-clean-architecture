@@ -47,15 +47,68 @@ describe('UserPresenter', () => {
         expect(true).toBe(true);
     });
 
-    // it('should list users and request new user on initialization', async () => {
-    //     await userPresenter.initManager();
+    it('should init manager (call showWelcomeMessage & listUsersAndRequestNewUser)', async () => {
+        const spyListUsersAndRequestNewUser =
+            jest.spyOn((userPresenter as any), 'listUsersAndRequestNewUser').mockResolvedValue(() => {});
+        const spyShowWelcomeMessage =
+            jest.spyOn((userPresenter as any), 'showWelcomeMessage').mockResolvedValue(() => {});
 
-    //     expect(mockUserView.showUsers).toHaveBeenCalled();
-    //     expect(mockUserView.requestInputName).toHaveBeenCalled();
-    //     expect(mockUserView.requestInputEmail).toHaveBeenCalled();
-    //     expect(mockUserView.requestInputPassword).toHaveBeenCalled();
-    //     expect(mockUserView.requestInputCity).toHaveBeenCalled();
-    //     expect(mockUserView.requestInputAddress).toHaveBeenCalled();
-    //     expect(mockUserView.requestInputPostalCode).toHaveBeenCalled();
-    // });
+        await userPresenter.initManager();
+
+        expect(spyListUsersAndRequestNewUser).toHaveBeenCalled();
+        expect(spyShowWelcomeMessage).toHaveBeenCalled();
+    });
+
+    it('should show welcome message', async () => {
+        await (userPresenter as any).showWelcomeMessage();
+
+        expect(mockUserView.showWelcomeMessage).toHaveBeenCalled();
+    });
+
+    it('should show users', async () => {
+        await (userPresenter as any).showUsers();
+
+        expect(mockUserView.showUsers).toHaveBeenCalledWith([]);
+    });
+
+    it('should request new user', async () => {
+        const spyListUsersAndRequestNewUser =
+            jest.spyOn((userPresenter as any), 'listUsersAndRequestNewUser').mockResolvedValue(() => {});
+
+        await (userPresenter as any).requestNewUser();
+
+        expect(mockUserView.requestInputName).toHaveBeenCalled();
+        expect(mockUserView.requestInputEmail).toHaveBeenCalled();
+        expect(mockUserView.requestInputPassword).toHaveBeenCalled();
+        expect(mockUserView.requestInputCity).toHaveBeenCalled();
+        expect(mockUserView.requestInputAddress).toHaveBeenCalled();
+        expect(mockUserView.requestInputPostalCode).toHaveBeenCalled();
+        expect(mockUserView.showSuccess).toHaveBeenCalled();
+        expect(spyListUsersAndRequestNewUser).toHaveBeenCalled();
+    });
+
+    it('should request an error when try to create user', async () => {
+        const spyRequestInputEmail = 
+            jest.spyOn(mockUserView, 'requestInputEmail').mockResolvedValue(() => Promise.reject("Error: email is required"));
+        const spyListUsersAndRequestNewUser =
+            jest.spyOn((userPresenter as any), 'listUsersAndRequestNewUser').mockResolvedValue(() => {});
+
+        await (userPresenter as any).requestNewUser();
+
+        expect(spyRequestInputEmail).toHaveBeenCalled();
+        expect(mockUserView.showError).toHaveBeenCalledWith("Error: email is required");
+        expect(spyListUsersAndRequestNewUser).toHaveBeenCalled();
+    });
+
+    it('should list users and request new user', async () => {
+        const spyShowUsers =
+            jest.spyOn((userPresenter as any), 'showUsers').mockResolvedValue(() => {});
+        const spyRequestNewUser =
+            jest.spyOn((userPresenter as any), 'requestNewUser').mockResolvedValue(() => {});
+
+        await (userPresenter as any).listUsersAndRequestNewUser();
+
+        expect(spyShowUsers).toHaveBeenCalled();
+        expect(spyRequestNewUser).toHaveBeenCalled();
+    });
 });
