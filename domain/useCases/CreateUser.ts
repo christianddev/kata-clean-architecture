@@ -9,7 +9,7 @@ export class CreateUserUseCase {
     }
 
     async run(user: User): Promise<void> {
-        const users = await this.userRepository.getUsers();
+        const users = await this.userRepository.getUsers() || [];
 
         const userWithSameEmail = users.find(usr => usr.email.value === user.email.value);
         const userDomain = user.email.value.split('@').pop()!;
