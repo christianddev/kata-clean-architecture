@@ -41,7 +41,7 @@ export class UserPresenter {
         const postalCode = await this.view.requestInputPostalCode();
 
         try {
-            const user = User.create({name, email, password, address, city, postalCode});
+            const user = User.create({ name, email, password, address, city, postalCode });
             await this.createUser.run(user);
             this.view.showSuccess(user);
         } catch (error) {
@@ -52,7 +52,7 @@ export class UserPresenter {
         }
     }
 
-    private async listUsersAndRequestNewUser(){
+    private async listUsersAndRequestNewUser() {
         await this.showUsers();
         await this.requestNewUser();
     }
